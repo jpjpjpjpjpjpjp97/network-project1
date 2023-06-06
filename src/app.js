@@ -1,12 +1,14 @@
 const express = require('express');
 const ActiveDirectory = require('activedirectory');
 const bodyParser = require('body-parser');
+const secrets = JSON.stringify(require('./secrets.json'));
+const secrets_json = JSON.parse(secrets);
 
 const config = {
-  url: 'ldap://your-domain-controller', // URL For AD Server
-  baseDN: 'dc=your-domain,dc=com', // Base domain name For AD Server
-  username: 'username',
-  password: 'password'
+  url: secrets_json.ldap_domain, // URL For AD Server
+  baseDN: secrets_json.ldap_dn, // Base domain name For AD Server
+  username: secrets_json.ldap_username,
+  password: secrets_json.ldap_password
 };
 
 const ad = new ActiveDirectory(config);
